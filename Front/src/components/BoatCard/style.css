@@ -1,0 +1,29 @@
+.boat-card {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.boat-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.boat-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.boat-card p {
+  margin-bottom: 5px;
+}
+
+.boat-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}

@@ -1,0 +1,77 @@
+.boat-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.boat-details .content {
+  display: flex;
+}
+
+.boat-details .image-container {
+  flex: 1;
+  display: flex; /* Adicionado */
+  justify-content: center; /* Adicionado */
+  align-items: center; /* Adicionado */
+  margin-right: 20px; /* Removido */
+}
+
+.boat-details .details-container {
+  flex: 1;
+}
+
+.boat-details h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.boat-details p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.boat-details img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: auto; /* Adicionado */
+}
+
+.boat-details .buttons {
+  margin-top: 20px;
+}
+
+.boat-details button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #08223d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.boat-details button:hover {
+  background-color: #0056b3;
+}
+
+.btn_dark_green {
+  background-color: #190e57;
+}
+
+.btn_dark_green:hover {
+  background-color: #246b43;
+}
+
+.boat-details .btn_whatsapp {
+  background-color: #25d366;
+}
+
+.boat-details .btn_whatsapp:hover {
+  background-color: #128c7e;
+}
