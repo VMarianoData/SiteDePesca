@@ -12,6 +12,7 @@ import Calendar from './Calendar';
 import Avaliacao from './Avaliacao';
 import BoatDetailsLogin from './BoatDetailsLogin';
 import ClienteDetalhes from './ClienteDetalhes';
+import EditBoat from './EditBoat';
 
   
   const routes = [{
@@ -31,7 +32,8 @@ import ClienteDetalhes from './ClienteDetalhes';
       ...Calendar,
       ...Avaliacao,
       ...BoatDetailsLogin,
-      ...ClienteDetalhes
+      ...ClienteDetalhes,
+      ...EditBoat
     ],
   },
 ];

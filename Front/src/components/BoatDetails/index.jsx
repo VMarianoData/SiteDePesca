@@ -1,6 +1,4 @@
 import React from 'react';
-import Button from '../Button';
-import User from '../../assets/public/user.svg';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 
@@ -30,6 +28,10 @@ const BoatDetails = ({ boat, goBack }) => {
         alert('Erro ao excluir a embarcação. Tente novamente mais tarde.');
       }
     }
+  };
+
+  const navigateToEdit = () => {
+    navigate(`/boats/${boat.id}/edit`, { state: { boat } });
   };
 
   return (
@@ -63,11 +65,18 @@ const BoatDetails = ({ boat, goBack }) => {
             >
               Entrar em contato
             </button>
-            { /* Criar botão vermelho para excluir o barco */}
             <button
-              onClick={deleteBoat} className='w-full btn_delete text-white py-2 rounded-md'
+              className='w-full btn_delete text-white py-2 rounded-md'
+              onClick={deleteBoat}
             >
               Excluir barco
+            </button>
+            {/* Botão para editar a embarcação */}
+            <button
+              onClick={navigateToEdit}
+              className="w-full bg-yellow-500 text-white py-2 rounded-md mt-4"
+            >
+              Editar barco
             </button>
           </div>
         </div>

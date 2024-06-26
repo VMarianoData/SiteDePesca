@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
-import './style.css';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function BoatForm() {
+const EditBoat = () => {
+  const { state } = useLocation();
+  const boat = state.boat;
+
   const [formData, setFormData] = useState({
-    proprietario: '',
-    nomeEmbarcacao: '',
-    arrais: '',
-    imagem: '',
-    capacidade: 0,
+    proprietario: boat.proprietario || '',
+    nomeEmbarcacao: boat.nomeEmbarcacao || '',
+    arrais: boat.arrais || '',
+    imagem: boat.imagem || '',
+    capacidade: boat.capacidade || 0,
+    decription: boat.decription || '',
   });
+
   const [mensagem, setMensagem] = useState('');
+
+  useEffect(() => {
+    if (!boat) return;
+
+    setFormData({
+      proprietario: boat.proprietario || '',
+      nomeEmbarcacao: boat.nomeEmbarcacao || '',
+      arrais: boat.arrais || '',
+      imagem: boat.imagem || '',
+      capacidade: boat.capacidade || 0,
+      decription: boat.decription || '',
+    });
+  }, [boat]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,47 +37,47 @@ function BoatForm() {
     });
   };
 
-  const handleCreateBoat = async (e) => {
-    e.preventDefault(); // Evitar que o formulário seja enviado
+  const handleUpdateBoat = async (e) => {
+    e.preventDefault();
 
     const boatData = formData;
 
     try {
-      const response = await fetch("http://localhost:8080/pesqueiros/embarcacoes", {
-        method: "POST",
+      const response = await fetch(`http://localhost:8080/pesqueiros/embarcacoes/${boat.id}`, {
+        method: 'PUT', // ou PATCH dependendo da sua API
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(boatData),
       });
 
-      console.log(response.status);
       if (!response.ok) {
-        throw new Error("Erro ao cadastrar a embarcação.");
+        throw new Error('Erro ao atualizar a embarcação.');
       }
 
-      const createdBoat = await response.json();
-      setMensagem(`Embarcação cadastrada com sucesso! ID: ${createdBoat.id}`);
+      setMensagem('Embarcação atualizada com sucesso!');
     } catch (error) {
-      setMensagem(
-        `${error} Erro ao cadastrar a embarcação. Verifique os dados informados.`
-      );
+      console.error('Erro ao atualizar a embarcação:', error);
+      setMensagem('Erro ao atualizar a embarcação. Verifique os dados informados.');
     }
   };
+
+  if (!boat) {
+    return <div>Carregando...</div>;
+  }
 
   return (
     <div className="container">
       <div className="header">
-        <h3>Cadastre seu Barco!</h3>
+        <h3>Editar Barco</h3>
       </div>
       <div className="form-container">
         <div className="form-header">
-          <p>Formulário</p>
+          <p>Formulário de Edição</p>
         </div>
         <div className="form-body">
-          <h1 className="form-title">Diga sobre seu barco!</h1>
-          <p>Descreva as informações do seu barco</p>
-          <form onSubmit={handleCreateBoat}>
+          <h1 className="form-title">Atualize as informações do seu barco</h1>
+          <form onSubmit={handleUpdateBoat}>
             <div className="box-input">
               <label htmlFor="proprietario">Proprietário <span className="required-field">*</span></label>
               <input
@@ -100,7 +118,7 @@ function BoatForm() {
                 value={formData.arrais}
                 onChange={handleInputChange}
               />
-              </div>
+            </div>
             <div className="box-input">
               <label htmlFor="imagem">Imagem do Barco <span className="required-field">*</span></label>
               <input
@@ -128,7 +146,7 @@ function BoatForm() {
               />
             </div>
             <div className="box-input">
-              <input type="submit" value="Enviar" className="btn-submit" />
+              <input type="submit" value="Atualizar" className="btn-submit" />
             </div>
           </form>
           {mensagem && <p>{mensagem}</p>}
@@ -136,6 +154,6 @@ function BoatForm() {
       </div>
     </div>
   );
-}
+};
 
-export default BoatForm;
+export default EditBoat;
